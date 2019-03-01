@@ -1,6 +1,6 @@
 <?php
 
-function get_pets()
+function get_pets($limit)
 {
 	$config = require 'config.php';
     $pdo = new PDO(
@@ -8,7 +8,8 @@ function get_pets()
     	$config['database_user'],
     	$config['database_pass']
     );
-    $result = $pdo->query('SELECT * FROM pet');
+    
+    $result = $pdo->query('SELECT * FROM pet LIMIT '.$limit);
     $pets = $result->fetchAll();
 
     return $pets;
